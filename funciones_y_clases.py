@@ -22,13 +22,17 @@ def anio_bisiesto(valor):
 
     Retorna True o False
     '''
-    if valor % 400 == 0:
-      return True
-    if valor % 100 == 0:
-      return False
+    result = False;
     if valor % 4 == 0:
-      return True;
+      result = True;
+    if valor % 100 == 0:
+      result = False
+    if valor % 400 == 0:
+      result = True
+    return result;
     
+
+
 
 def contar_valles(pasos):
     '''Contar el número de valles
@@ -126,7 +130,7 @@ print(pares_medias([1,1,1,2,2,2,1]))
 # si `lista` es [1,2,3,4], __str__ debe devolver '1,2,3,4'
 class ListaComa:
 
-  def ListaComa (self, iterable_var):
+  def __init__ (self, iterable_var):
     self.lista = iterable_var
 
   def __str__(self):
@@ -141,8 +145,6 @@ a = ListaComa([1,2,3,4])
 print(str(a))
 
   
-
-
 
 # Crear una clase llamada `Persona` que reciba en su constructor como 1er 
 # argumento un iterable con el valor inicial para una lista que se guardará en
@@ -159,10 +161,30 @@ print(str(a))
 # Ejemplo:
 # si `nombres` es ['Juan', 'David'] y `apellidos` es ['Torres', 'Salazar'],
 # el método `nombre completo` debe devolver  'Juan David Torres Salazar'
+class Persona:
+    def __init__(self, iterable_arg, iterable_arg2):
+      self.nombres = list()
+      for obj in iterable_arg:        
+        if not isinstance(obj, str):
+          raise Exception('Eleento en iterable de nombres no es Strnig')
+        self.nombres.append(obj.capitalize())
+      self.apellidos= list()
+      for obj in iterable_arg2:        
+        if not isinstance(obj, str):
+          raise Exception('Eleento en iterable de apellidos no es Strnig')
+        self.apellidos.append(obj.capitalize())
+    def nombre_completo(self):
+      ans = '';
+      for nombre in self.nombres:
+        if len(ans)>0:
+          ans+= ' '
+        ans+=nombre
+      for apellido in self.apellidos:
+        ans+=' ' + apellido
+      return ans
 
-
-
-
+#p = Persona(['Alvaro','Pablo','Daniel',],['Infante','Rojas']);
+#print(p.nombre_completo())
 
 # Crear una clase llamada `Persona1` que herede de la clase `Persona`, y que en su
 # constructor reciba además de los atributos del padre, una variable tipo 
@@ -174,4 +196,18 @@ print(str(a))
 # Ejemplo:
 # si `fecha_nacimiento` es 1985-10-21 y la fecha actual es 2020-10-20, el método
 # `edad` debe devover 35.
+from datetime import datetime
 
+class Persona1(Persona):
+  def __init__ (self, iterable_arg, iterable_arg2, nacimiento):
+    super().__init__(iterable_arg, iterable_arg2)
+    if not isinstance(nacimiento, datetime):
+      raise Exception('nacimiento no es de tipo DateTime')
+    self.fecha_nacimiento = nacimiento
+
+  def edad(self):
+    print(self.fecha_nacimiento.year)    
+    return datetime.now().year - int(self.fecha_nacimiento.year)
+
+p = Persona1(['Alvaro','Pablo','Daniel'],['Infante','Rojas'],datetime.fromisoformat('1982-06-03'))
+print(p.edad())
