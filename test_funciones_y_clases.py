@@ -45,6 +45,7 @@ for i in range(20):
     for i in range(1, random.randint(25, 40)):
         ll.append(1 if random.random() > 0.7 and ll[i-1] != 1 else 0)
     ll.append(0)
+    print(ll)
     c = 0; i = 0; l = len(ll)
     while i < l-1:
         c += 1; i += 2 if i+2 < l and ll[i+2] == 0 else 1

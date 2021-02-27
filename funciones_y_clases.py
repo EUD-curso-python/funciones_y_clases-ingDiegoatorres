@@ -62,7 +62,7 @@ def contar_valles(pasos):
           valles += 1          
         bajando = False
     return valles;
-print(contar_valles([-1,1,0,1,1,-1,0,0,1,-1,1,1,-1,-1]))
+#print(contar_valles([-1,1,0,1,1,-1,0,0,1,-1,1,1,#-1,-1]))
 
 
 def saltando_rocas(rocas):
@@ -80,6 +80,7 @@ def saltando_rocas(rocas):
     jugador para ganar la partida
     '''
     saltos = 0
+    print(rocas)
     i=-1
     while (i<len(rocas)-1):    
       saltos += 1      
@@ -96,7 +97,7 @@ def saltando_rocas(rocas):
       i+=1
       print ('no')
     return saltos
-#print(saltando_rocas([0,0,0]))
+print(saltando_rocas([0,0,0]))
 
     
 
@@ -121,7 +122,7 @@ def pares_medias(medias):
     
     return ans
 
-print(pares_medias([1,1,1,2,2,2,1]))
+#print(pares_medias([1,1,1,2,2,2,1]))
 
 # Crear una clase llamada `ListaComa` que reciba en su constructor un iterable
 # con el valor inicial para una lista que se guardará en un atributo llamado 
@@ -142,7 +143,7 @@ class ListaComa:
     return resultado
 
 a = ListaComa([1,2,3,4])
-print(str(a))
+#print(str(a))
 
   
 
@@ -205,9 +206,11 @@ class Persona1(Persona):
       raise Exception('nacimiento no es de tipo DateTime')
     self.fecha_nacimiento = nacimiento
 
-  def edad(self):
-    print(self.fecha_nacimiento.year)    
-    return datetime.now().year - int(self.fecha_nacimiento.year)
+  def edad(self):    
+    diferencia =  datetime.now().year - int(self.fecha_nacimiento.year)
+    if datetime.now().month < self.fecha_nacimiento.month:
+      diferencia-= 1
+    return diferencia
 
 p = Persona1(['Alvaro','Pablo','Daniel'],['Infante','Rojas'],datetime.fromisoformat('1982-06-03'))
 print(p.edad())
