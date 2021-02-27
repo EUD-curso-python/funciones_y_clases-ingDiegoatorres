@@ -130,7 +130,6 @@ def pares_medias(medias):
 # los elementos del atributo `lista` unidos a través de comas. Ejemplo:
 # si `lista` es [1,2,3,4], __str__ debe devolver '1,2,3,4'
 class ListaComa:
-
   def __init__ (self, iterable_var):
     self.lista = iterable_var
 
@@ -140,10 +139,13 @@ class ListaComa:
       if (len(resultado)>0):
         resultado+=','      
       resultado += str(elemento)
+    print('Calculado = ' + resultado)
+    print('Profesor  = ' + ','.join([str(el) for el in self.lista]))
     return resultado
 
+
 a = ListaComa([1,2,3,4])
-#print(str(a))
+print('[' + str(a) + "]")
 
   
 
@@ -197,20 +199,24 @@ class Persona:
 # Ejemplo:
 # si `fecha_nacimiento` es 1985-10-21 y la fecha actual es 2020-10-20, el método
 # `edad` debe devover 35.
-from datetime import datetime
+from datetime import date
 
 class Persona1(Persona):
   def __init__ (self, iterable_arg, iterable_arg2, nacimiento):
     super().__init__(iterable_arg, iterable_arg2)
-    if not isinstance(nacimiento, datetime):
-      raise Exception('nacimiento no es de tipo DateTime')
+    
     self.fecha_nacimiento = nacimiento
 
   def edad(self):    
-    diferencia =  datetime.now().year - int(self.fecha_nacimiento.year)
-    if datetime.now().month < self.fecha_nacimiento.month:
+    diferencia =  date.today().year - int(self.fecha_nacimiento.year)
+    if date.today().month < self.fecha_nacimiento.month:
+      diferencia-= 1
+    elif date.today().month ==  self.fecha_nacimiento.month   and date.today().day <  self.fecha_nacimiento.day:
       diferencia-= 1
     return diferencia
+    #t = date.now()
+    #return (t.year - self.fecha_nacimiento.year) - (1 if t #< date(t.year, self.fecha_nacimiento.month, #self.fecha_nacimiento.day) else 0)
 
-p = Persona1(['Alvaro','Pablo','Daniel'],['Infante','Rojas'],datetime.fromisoformat('1982-06-03'))
-print(p.edad())
+
+p = Persona1(['Alvaro','Pablo','Daniel'],['Infante','Rojas'],date.fromisoformat('1982-02-27'))
+print('Edad', p.edad())

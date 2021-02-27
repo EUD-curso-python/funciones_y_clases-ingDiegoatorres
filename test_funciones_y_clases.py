@@ -95,6 +95,7 @@ def test_Persona(nombres, apellidos):
 def fn3( d ):
     t = date.today()
     return (t.year - d.year) - (1 if t < date(t.year, d.month, d.day) else 0)
+    
 
 persona1 = [
     [
