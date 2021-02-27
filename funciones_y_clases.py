@@ -1,15 +1,16 @@
 global1 = 34
 
-def cambiar_global():
+def cambiar_global(arg1):
     '''Cambiar una variable global
 
     Esta función debe asignarle a la variable global `global1` el valor que se
     le pasa como único argumento posicional.
     '''
-    pass
+    global global1
+    global1 = arg1    
+    
 
-
-def anio_bisiesto():
+def anio_bisiesto(valor):
     '''Responder si el entero pasado como argumento es un año bisiesto
     
     Para determinar si un año es bisiesto, se deben tener en cuenta las 
@@ -21,10 +22,16 @@ def anio_bisiesto():
 
     Retorna True o False
     '''
-    pass
+    if valor % 400 == 0:
+      return True
+    if valor % 100 == 0:
+      return False
+    if valor % 4 == 0:
+      return True;
+    
 
-def contar_valles():
-    r'''Contar el número de valles
+def contar_valles(pasos):
+    '''Contar el número de valles
 
     Esta función debe recibir como argumento una lista de -1's, 0's y 1's, y lo 
     que representan son las subidas y las bajadas en una ruta de caminata. -1
@@ -41,9 +48,20 @@ def contar_valles():
     representados en la lista, que para el ejemplo que se acaba de mostrar es
     de 3 valles.
     '''
-    pass
+    valles = 0
+    bajando = False   
+    for i in pasos:
+      if (i == -1):
+        bajando = True
+      if (i == 1):
+        if bajando:
+          valles += 1          
+        bajando = False
+    return valles;
+print(contar_valles([-1,1,0,1,1,-1,0,0,1,-1,1,1,-1,-1]))
 
-def saltando_rocas():
+
+def saltando_rocas(rocas):
     '''Mínimo número de saltos en las rocas
 
     Esta función hace parte de un juego en el que el jugador debe cruzar un río
@@ -57,7 +75,26 @@ def saltando_rocas():
     El objetivo es devolver el número mínimo de saltos que debe realizar el 
     jugador para ganar la partida
     '''
-    pass
+    saltos = 0
+    i=-1
+    while (i<len(rocas)-1):    
+      saltos += 1      
+      print (i, saltos)
+      if (i<len(rocas)-2 and rocas[i+2] == 0 ): 
+        i+= 2
+        print('yes', i)
+        continue
+
+      if (i<len(rocas)-1 and rocas[i+1] == 0):
+        i+= 1
+        print('yes2')
+        continue
+      i+=1
+      print ('no')
+    return saltos
+#print(saltando_rocas([0,0,0]))
+
+    
 
 def pares_medias():
     '''Contar pares de medias
